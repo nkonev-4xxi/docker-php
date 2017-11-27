@@ -5,15 +5,16 @@ COPY ./symfony.pool.conf /usr/local/etc/php-fpm.d/
 
 RUN apk update && apk add \
     git \
-    zlib-dev \
     icu-dev \
-    libmcrypt-dev
+    libmcrypt-dev \
+    zlib-dev
 
 RUN docker-php-ext-install \
-    pdo \
     bcmath \
     intl \
     mcrypt \
+    opcache \
+    pdo \
     zip
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
