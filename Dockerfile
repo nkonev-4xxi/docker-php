@@ -1,4 +1,4 @@
-FROM php:7-fpm-alpine
+FROM php:7.1-fpm-alpine
 
 COPY ./symfony.ini /usr/local/etc/php/conf.d
 COPY ./symfony.pool.conf /usr/local/etc/php-fpm.d/
