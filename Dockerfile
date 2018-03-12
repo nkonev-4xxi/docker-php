@@ -1,25 +1,9 @@
-FROM php:7-fpm-alpine
-
-COPY ./symfony.ini /usr/local/etc/php/conf.d
-COPY ./symfony.pool.conf /usr/local/etc/php-fpm.d/
+FROM php:7.2.2-fpm-alpine3.7
 
 RUN apk update && apk add \
     git \
-    zlib-dev \
-    icu-dev \
-    libmcrypt-dev
-
-RUN docker-php-ext-install \
-    pdo \
-    bcmath \
-    intl \
-    mcrypt \
-    zip
+    zlib-dev
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && chmod +x /usr/local/bin/composer
-
-# RUN adduser -D -u 1000 www-data
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
