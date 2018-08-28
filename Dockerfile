@@ -19,4 +19,5 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && chmod +x /usr/local/bin/composer
 
-RUN usermod -u 1000 www-data
+ENV DOCKER_HOST_USER_ID 1000
+RUN usermod -u ${DOCKER_HOST_USER_ID} www-data
